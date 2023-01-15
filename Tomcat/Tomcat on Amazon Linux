@@ -1,0 +1,26 @@
+FROM amazonlinux:latest
+
+# Install Tomcat
+RUN yum update -y && \
+    /usr/share/tomcat
+
+# Set environment variables
+ENV CATALINA_HOME="/usr/share/tomcat"
+ENV CATALINA_BASE="/var/lib/tomcat"
+
+# Start Tomcat
+CMD ["/usr/share/tomcat/bin/catalina.sh", "run"]
+
+-----------------------------------------------------------------------------------------
+In this example, the Dockerfile starts with the 'amazonlinux:latest' base image.
+Then it updates the package and install the tomcat package.
+It then sets the CATALINA_HOME and CATALINA_BASE environment variables to the appropriate locations.
+Finally, it starts the Tomcat server by running the 'catalina.sh' script with the 'run' command.
+---------------------------------------------------------------------------------------------------------------
+You can build the image by running the following command in the same directory where the Dockerfile is located
+docker build -t my-tomcat .
+---------------------------------------------------------------------------------------------------------------
+You can then run a container from the image and start the Tomcat server by running the following command:
+docker run -p 8080:8080 my-tomcat
+-----------------------------------------------------------------------------------------------------------------
+This will create a container with the name 'my-tomcat' and will map the host's port 8080 to the container's port 8080, so you can access the Tomcat server via http://localhost:8080
